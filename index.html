@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회전초밥</title>
+    <link rel="stylesheet" href="style/normalize.css" />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <article id="app">
+      <ul class="list-item">
+        <li>
+          <img src="img/1_dish.png" alt="" />
+        </li>
+        <li>
+          <img src="img/2_dish.png" alt="" />
+        </li>
+        <li>
+          <img src="img/3_dish.png" alt="" />
+        </li>
+        <li>
+          <img src="img/4_dish.png" alt="" />
+        </li>
+        <li>
+          <img src="img/5_dish.png" alt="" />
+        </li>
+        <li>
+          <img src="img/6_dish.png" alt="" />
+        </li>
+        <li>
+          <img src="img/7_dish.png" alt="" />
+        </li>
+      </ul>
+    </article>
+
+    <script>
+      const center = document.querySelector(".list-item");
+      const items = document.querySelectorAll(".list-item li");
+      const angle = 360 / items.length;
+      let currAngle = 100;
+
+      for (let i = 0; i < items.length; i++) {
+        items[i].addEventListener("click", function (event) {
+          items[i].innerHTML = `<img src="img/empty.png" alt="" />`;
+          if (!items[i].classList.contains("empty")) {
+            let audio = new Audio("mp3/Cash_Register.mp3");
+            audio.play();
+            items[i].innerHTML += "<div class='price'>-1000</div>";
+          }
+          items[i].classList.add("empty");
+        });
+      }
+
+      setInterval(() => {
+        currAngle += 3;
+        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+      }, 100);
+    </script>
+  </body>
+</html>
